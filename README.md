@@ -1,73 +1,53 @@
-## 0. Intro
-
-While going through this training you will develop console `online store`. Each next task will append some functionality or flexibility to it; 
-
-Each task has a description and materials, it doesn't mean that you should read this or only this materials,
- you are free to 'google' topics and select the most preferable content.
- 
-### Process 
-A trainee must read and understand all materials related to the task and then complete all requirements from the task file.
-
-A link to the pull request must be sent to the trainer via Email or Skype. 
-The trainer performs the code review, a trainee must update code according to the comments from 
-the code review and then inform his/her trainer that additional code review is required in the 
-scope of the same pull request. 
-
-### Administrative part
-A trainee is obligated to inform his trainer about vacations or other activities, which will stop training process for 1 week and more. If there is no obstacles, then it is advised to complete at least one task per week (depends on the task scope). If a trainee is assigned on a project, then he/she should work on the training in his/her own time. Training must be completed in < 3 months. If training takes > 3 months, then situation will be reviewed individually (continue or stop the training and find the cause of a slow progress). 
-If a trainee has difficulties, then he/she can ask the trainer for advice or a hint (only about the task itself). The final task is the end of the training. Basing on this task the trainer forms feedback for stakeholders, therefore a trainee works on it without any help. 
-
-### Before start
-
-#### Knowledge
-
-Before starting this course you should be familiar with:
-
-- Programming in general
-- How to write and launch java application
-- Java classes, methods, variables, exceptions
-- Java if/else, switch, loops 
-
-All this topics you can discover before the course [here](https://www.homeandlearn.co.uk/java/java.html) (Sections 1-8) 
-
-#### Software
-
-Before start you should install:
-
-1. [Java 1.8](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html)
-2. [Git](https://git-scm.com/)
-3. [IntellijIdea](https://www.jetbrains.com/idea/) Community edition
-
-----
-Good luck! 
-
-## 1. Git
-
-----
-### Materials
-
-[Git](https://git-scm.com/doc)
-
-[GitHub Hello World](https://guides.github.com/activities/hello-world/)
-
-[GitHub. Common workflows](https://drive.google.com/file/d/1ScaBHdoBatP-MaWqqvTmBeuO\_A7nyhJ4/view?usp=sharing)
-
-
-
-### Task #1
-
-We will store source code of our `OnlineStore` in GitHub. Before start you should read and 
-understand git principals and main git commands.
-
-- Start new branch out of main branch.
-- Give it a name like `01git`, or `task1-git`, or anything suitable.
-- Change something in this newly created branch. For example, add couple of lines into README.md file, or add a new file, or delete existing one.
-- Create a pull request from your branch to main branch, and assign it to your trainer. 
-Do not merge it yourself!
-
-### few changes in readme file for Task 1
-
-few changes in readme file for Task 1
-few changes in readme file for Task 1
-
-
+# 2. Maven (EN)
+## Task #2
+Before starting the implementation of `OnlineStore,` we need to prepare the project structure and set up a dependency manager.
+We will use `Maven` to handle our project dependencies and source code build.
+Create a multi-module maven project in `IntelliJ Idea,` with such modules:
+1. OnlineStore (this is the parent module)
+2. domain
+3. store
+4. consoleApp
+### Useful links
+If you are unfamiliar with Maven, you can get your first impression of this build tool by visiting the following resources.
+Additional read
+- [Maven in 5 Minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
+- [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/index.html)
+- [Naming Maven](http://maven.apache.org/guides/mini/guide-naming-conventions.html)
+- [Naming Java](https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html)
+If it’s still vague and unclear what to do, you’d better read a series of educational materials to help you better understand `Maven`. Video lectures or, better to say, screencasts will show you what you have to do in detail.
+## Learning Materials
+### Maven lectures (part1)
+#### 1.1. Installing maven
+Large programs Getting to know Maven Downloading and installing Maven Environment Variables Local Maven repository […](https://www.craft.do/s/UI0qaZE7kn4vFy)
+#### 1.2. Creating a Maven project
+One of the things Maven has standardized on first is the project description. Before Maven, every IDE had its project file that stored information about the project and its build (and often in binary form) […](https://www.craft.do/s/HgLBhfekX48LeE)
+#### 1.3. Archetypes in Maven.
+There is another way to create a Maven project in IDEA - based on an archetype […](https://www.craft.do/s/kwW7Hc2G63df6W)
+#### 1.4. Dependencies in a Maven project
+How to search for libraries in the Maven Repository dependencies repository […](https://www.craft.do/s/70qC0sb1SjT8kU)
+#### 1.5. Phases of a Maven project
+List of project phases Project assembly Work cycles […](https://www.craft.do/s/YH0uFGF7TyejRV)
+#### 1.6. Maven plugins
+Getting to know plugins Lifecycle and plugins Goals in Maven - goals […](https://www.craft.do/s/yRMF8jV6DXKnWf)
+#### 1.7. Maven properties
+Variables in Maven - properties Predefined variables in Maven […](https://www.craft.do/s/Iv8x1h69TAdJHz)
+#### 1.8. Building a Maven project
+The project’s structure is described in the pom.xml file, which must be located in the project’s root folder. The contents of the project file are as follows […](https://www.craft.do/s/wMX1rUzdwmeh4X)
+### Maven (part2)
+#### 2.1. Advanced Maven project build
+List of plugins to build in Maven Compilation plugin maven-compiler-plugin Build jar file maven-jar-plugin Generate buildnumber-maven-plugin plugin […](https://www.craft.do/s/Tmsn6cYhHrWNMg)
+#### 2.2. File management during the build of a Maven project
+Resource copying plugin maven-resources-plugin Resource filtering with maven-resources-plugin Source inclusion plugin maven-source-plugin Dependency copying plugin maven-dependency-plugin […](https://www.craft.do/s/Ah2GA6b2mDHgBz)
+#### 2.3. Building a war-project
+Differences between war and jar files. The maven-war-plugin to create a war file. Building a web application based on SpringBoot  […](https://www.craft.do/s/JBbLR6ZuQP8gPB)
+#### 2.4. Testing a Maven project at build time
+Testing in Maven. Test setup. How to quickly eliminate broken tests  […](https://www.craft.do/s/3a4cAd2Pb5nwK7)
+#### 2.5. Deploying a project with Maven
+Using maven-deploy-plugin. Deploying a web application in Tomcat using Maven. Deploying with the Cargo Plugin. Deploying with IntelliJ IDEA  […](https://www.craft.do/s/qu9ACvcSsIXxz2)
+#### 2.6. Useful Maven plugins
+Your own maven repository on GitHub. Package an assembly into a Docker image  […](https://www.craft.do/s/H1YIcB95shJe93)
+## Video Lectures
+1. [Maven Basics] (https://youtu.be/zB3kE41mO7k) - Вasics of maven. How to add and manage dependencies, and how to create multimodular projects.
+2. [Creating a new multi-modular maven project] (https://youtu.be/vrYOK74ejv0) - creating a new maven project in IntelliJ IDEA.
+3. [Solution of task #2] (https://youtu.be/bEtjDfwVcRo) - creating a multi-modular maven project from scratch by cloning the project from GitHub and adding Maven framework support.
+4. [How to use GitHub Classroom] (https://drive.google.com/file/d/1XJdz2a37VsBvBEmMVYRjcHOAEc5QlNPi/view)   - Workflows with GitHub Classroom. Common mistakes.
