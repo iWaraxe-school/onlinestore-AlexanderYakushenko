@@ -1,41 +1,46 @@
 package org.issoft;
-
-import com.github.javafaker.Faker;
-import java.util.Random;
+import org.reflections.Reflections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RandomStorePopulator {
 
-    private static final Faker FAKER = new Faker();
+    private Store store;
 
-    private Double generatePrice(){
 
-        return FAKER.number().randomDouble(2,0,1000);
+    public RandomStorePopulator(Store store) {
+        this.store = store;
     }
 
-    private Double generateRate(){
+    public Set<Category> createCategories() {
+        Set<Category> categories = new HashSet<>();
+        Reflections reflections = new Reflections("org.issoft");
+        Set<Class<? extends Category>> subCategoryClasses = reflections.getSubTypesOf(Category.class);
 
-        return FAKER.number().randomDouble(1,0,5);
+        for (Class<? extends Category> subCategoryClass : subCategoryClasses) {
+            try {
+                categories.add(subCategoryClass.getConstructor().newInstance());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return categories;
     }
 
-    private String generateName(String categoryName){
+    public void fillStore() {
+        Set<Category> categories = createCategories();
+        RandomProductGenerator generator = new RandomProductGenerator();
 
-        if (categoryName.equals("Bike")) {
-            return FAKER.beer().name();
+        for (Category category : categories) {
+            for (int i = 0; i < 10; i++) {
+                Product product = generator.generateProduct(category.getName());
+                category.addProduct(product);
+            }
+            store.addCategory(category);
         }
 
-        if (categoryName.equals("Milk")) {
-            return FAKER.food().ingredient();
-        }
 
-        if (categoryName.equals("Phone")) {
-            return FAKER.animal().name();
-        }
-
-        return null;
     }
 
-    public Product generateProduct(String categoryName){
 
-        return new Product(generateName(categoryName),generatePrice(),generateRate());
-    }
 }

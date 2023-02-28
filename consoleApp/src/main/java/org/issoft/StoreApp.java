@@ -4,7 +4,12 @@ public class StoreApp {
 
     public static void main(String[] args) {
 
-       Store onlineStore = new Store();
+       Store store = new Store();
+       RandomStorePopulator populator = new RandomStorePopulator(store);
+       populator.fillStore();
+
+       store.printData();
+
     }
 }
 

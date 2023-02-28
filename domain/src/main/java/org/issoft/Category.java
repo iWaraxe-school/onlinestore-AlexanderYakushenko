@@ -17,8 +17,19 @@ public class Category {
             return name;
         }
 
-        public List<Product> getProductList() {
-            return productList;
+    public void printProducts() {
+        for (Product product: productList) {
+            System.out.println(product);
         }
+    }
+    public void printCategoryName(){
+        System.out.println(name);
+    }
+
+    public void addProduct (Product product){
+            productList.add(product);
+
+    }
+
 
 }
