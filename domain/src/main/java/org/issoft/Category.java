@@ -7,6 +7,9 @@ public class Category {
 
         private String name;
         private List<Product> productList;
+        public List<Product> getProductList() {
+        return productList;
+    }
 
         public Category(String name) {
             this.name = name;
@@ -16,7 +19,6 @@ public class Category {
         public String getName() {
             return name;
         }
-
     public void printProducts() {
         for (Product product: productList) {
             System.out.println(product);
@@ -25,11 +27,8 @@ public class Category {
     public void printCategoryName(){
         System.out.println(name);
     }
-
     public void addProduct (Product product){
             productList.add(product);
 
     }
-
-
 }

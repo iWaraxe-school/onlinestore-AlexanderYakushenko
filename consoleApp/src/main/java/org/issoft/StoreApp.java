@@ -10,6 +10,9 @@ public class StoreApp {
 
        store.printData();
 
+        //store.printTopProducts();
+        store.sortByXml();
+
     }
 }
 
