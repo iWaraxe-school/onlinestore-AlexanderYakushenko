@@ -12,6 +12,7 @@
         <module>domain</module>
         <module>consoleApp</module>
         <module>store</module>
+        <module>Comparator</module>
     </modules>
 
     <properties>
