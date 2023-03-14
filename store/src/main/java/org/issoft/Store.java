@@ -1,10 +1,14 @@
 package org.issoft;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 public class Store {
-    private List<Category> categoryList = new ArrayList<>();
+    private final List<Category> categoryList = new ArrayList<>();
 
-    public void addCategory (Category category) {
+    public void addCategory(Category category) {
         categoryList.add(category);
     }
 
@@ -15,10 +19,16 @@ public class Store {
         }
     }
 
-    public List<Product> sortByXml() {
-        List<Product> allProducts = getAllProducts();
-
+    public void sortByXml() {
         Map<String, String> fieldToSort = XMLParser.parseXml();
+        Comparator<Product> comparator = getComparator(fieldToSort);
+
+        for (Category category : categoryList) {
+            category.getProductList().sort(comparator);
+        }
+    }
+
+    private Comparator<Product> getComparator(Map<String, String> fieldToSort) {
         List<Comparator<Product>> comparators = new ArrayList<>();
         for (Map.Entry<String, String> entry : fieldToSort.entrySet()) {
             Sorting sorting = Sorting.valueOf(entry.getValue());
@@ -38,17 +48,20 @@ public class Store {
         for (int i = 1; i < comparators.size(); i++) {
             generalComparator = generalComparator.thenComparing(comparators.get(i));
         }
-        allProducts.sort(generalComparator);
-        return allProducts;
+
+        return generalComparator;
     }
 
-        private List<Product> getAllProducts() {
-            List<Product> allProducts = new ArrayList<>();
-            for (Category category : categoryList) {
-                allProducts.addAll(category.getProductList());
+    public void printTopProducts() {
+        Comparator<Product> comparator = Comparator.comparing(Product::getRate).reversed();
+        for (Category category : categoryList) {
+            System.out.println(category.getName());
+            category.getProductList().sort(comparator);
+            for (int i = 0; i < 5; i++) {
+                System.out.println(category.getProductList().get(i));
             }
-            return allProducts;
         }
     }
+}
 
 

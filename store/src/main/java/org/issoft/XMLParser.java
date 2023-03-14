@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class XMLParser {
     final String fileName = "config.xml";
-    private final static String PATH = "config.xml";
+    private final static String PATH = "store/src/main/resources/config.xml";
     private static Map<String, String> fieldToSort = new LinkedHashMap<>();
 
     public static Map<String, String> parseXml() {
