@@ -1,11 +1,16 @@
 package org.issoft;
 
+import org.apache.commons.exec.util.MapUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
 public class Store {
+
+    int TOP_PRODUCTS_NUMBER =5;
     private final List<Category> categoryList = new ArrayList<>();
 
     public void addCategory(Category category) {
@@ -14,8 +19,11 @@ public class Store {
 
     public void printData() {
         for (Category category : categoryList) {
+            System.out.println("***************");
             category.printCategoryName();
+            System.out.println("---------------");
             category.printProducts();
+            System.out.println("---------------");
         }
     }
 
@@ -28,9 +36,15 @@ public class Store {
         }
     }
 
-    private Comparator<Product> getComparator(Map<String, String> fieldToSort) {
+    public Comparator<Product> getComparator(Map<String, String> fieldToSort) {
         List<Comparator<Product>> comparators = new ArrayList<>();
         for (Map.Entry<String, String> entry : fieldToSort.entrySet()) {
+
+//            if (MapUtils.isEmpty(comparators)) {
+//                System.out.println("string is empty or null");
+//            }
+
+
             Sorting sorting = Sorting.valueOf(entry.getValue());
             String field = entry.getKey();
 
@@ -57,7 +71,7 @@ public class Store {
         for (Category category : categoryList) {
             System.out.println(category.getName());
             category.getProductList().sort(comparator);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < TOP_PRODUCTS_NUMBER; i++) {
                 System.out.println(category.getProductList().get(i));
             }
         }

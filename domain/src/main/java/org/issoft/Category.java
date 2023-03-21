@@ -19,6 +19,7 @@ public class Category {
         public String getName() {
             return name;
         }
+
     public void printProducts() {
         for (Product product: productList) {
             System.out.println(product);
