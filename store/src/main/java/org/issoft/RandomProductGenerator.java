@@ -17,7 +17,6 @@ public class RandomProductGenerator {
     }
 
     private String generateName(String categoryName) {
-
         if (categoryName.equals("Bike")) {
             return FAKER.beer().name();
         }
@@ -29,10 +28,12 @@ public class RandomProductGenerator {
         }
         return null;
     }
-
     public Product generateProduct(String categoryName) {
-
-        return new Product(generateName(categoryName), generatePrice(), generateRate());
+        Product product = Product.newProductBuider()
+                .setName(generateName(categoryName))
+                .setPrice(generatePrice())
+                .setRate(generateRate())
+                .build();
+        return product;
     }
-
 }
