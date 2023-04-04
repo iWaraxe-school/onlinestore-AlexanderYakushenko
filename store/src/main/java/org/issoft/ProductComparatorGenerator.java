@@ -6,7 +6,7 @@ import java.util.Comparator;
 public class ProductComparatorGenerator {
 
     //getComparator returns different comparator’s objects depending on parameter field value.
-
+    //Factory method used
         public static Comparator<Product> getComparator(String field) {
             switch (field) {
                 case "name":
