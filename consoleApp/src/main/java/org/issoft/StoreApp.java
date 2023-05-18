@@ -9,6 +9,7 @@ public class StoreApp {
 
     public static void main(String[] args)throws IOException  {
 
+
         Store store = Store.getStore();
         RandomStorePopulator populator = new RandomStorePopulator(store);
         populator.fillStore();
@@ -17,9 +18,8 @@ public class StoreApp {
         Scanner sc = new Scanner(new InputStreamReader(System.in));
 
             boolean isRunning = true;
-
+        System.out.println("введи одну из команд: sort, top, quit");
         while(isRunning)
-
             {
                     switch (sc.nextLine()) {
                         case "sort":
@@ -31,7 +31,6 @@ public class StoreApp {
                         case "quit":
                             isRunning = false;
                             break;
-
                         default:
                             System.out.println("Command is not supported.");
                     }
