@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Store {
+    private static final Store store =new Store();
 
     int TOP_PRODUCTS_NUMBER =5;
     private final List<Category> categoryList = new ArrayList<>();
@@ -17,6 +18,13 @@ public class Store {
         categoryList.add(category);
     }
 
+    //Singleton
+    public static Store getStore(){
+    //    if (store == null){
+    //        store = new Store();
+    //    }
+        return store;
+    }
     public void printData() {
         for (Category category : categoryList) {
             System.out.println("***************");
@@ -43,7 +51,6 @@ public class Store {
 //            if (MapUtils.isEmpty(comparators)) {
 //                System.out.println("string is empty or null");
 //            }
-
 
             Sorting sorting = Sorting.valueOf(entry.getValue());
             String field = entry.getKey();
