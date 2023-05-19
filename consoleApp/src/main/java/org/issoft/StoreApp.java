@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 public class StoreApp {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)throws IOException  {
 
 
-        Store store = new Store();
+        Store store = Store.getStore();
         RandomStorePopulator populator = new RandomStorePopulator(store);
         populator.fillStore();
 
