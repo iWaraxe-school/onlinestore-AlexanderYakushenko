@@ -9,7 +9,6 @@ public class StoreApp {
 
     public static void main(String[] args)throws IOException  {
 
-
         Store store = Store.getStore();
         RandomStorePopulator populator = new RandomStorePopulator(store);
         populator.fillStore();
@@ -18,7 +17,8 @@ public class StoreApp {
         Scanner sc = new Scanner(new InputStreamReader(System.in));
 
             boolean isRunning = true;
-        System.out.println("введи одну из команд: sort, top, quit");
+            boolean isOrderCleanerOn = false;
+        System.out.println("введи одну из команд: sort, top, create order, quit");
         while(isRunning)
             {
                     switch (sc.nextLine()) {
@@ -27,6 +27,13 @@ public class StoreApp {
                             break;
                         case "top":
                             store.printTopProducts();
+                            break;
+                        case "create order":
+                            store.createOrder();
+                            if (!isOrderCleanerOn) {
+                                store.cleanOrder();
+                                isOrderCleanerOn = true;
+                            }
                             break;
                         case "quit":
                             isRunning = false;

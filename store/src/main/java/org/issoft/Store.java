@@ -8,22 +8,27 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+//import static org.issoft.XMLParser.fieldToSort;
+
 public class Store {
     private static final Store store =new Store();
-
     int TOP_PRODUCTS_NUMBER =5;
     private final List<Category> categoryList = new ArrayList<>();
 
     public void addCategory(Category category) {
         categoryList.add(category);
     }
-
     //Singleton
     public static Store getStore(){
-    //    if (store == null){
-    //        store = new Store();
-    //    }
         return store;
+    }
+    public void createOrder() {
+        Order order = new Order();
+        order.start();
+    }
+    public void cleanOrder() {
+        OrderCleaner orderCleaner = new OrderCleaner();
+        orderCleaner.start();
     }
     public void printData() {
         for (Category category : categoryList) {
@@ -43,14 +48,17 @@ public class Store {
             category.getProductList().sort(comparator);
         }
     }
+    public List<Product> getAllProducts() {
+        List<Product> allProducts = new ArrayList<>();
+        for (Category category : categoryList) {
+            allProducts.addAll(category.getProductList());
+        }
+        return allProducts;
+    }
 
     public Comparator<Product> getComparator(Map<String, String> fieldToSort) {
         List<Comparator<Product>> comparators = new ArrayList<>();
         for (Map.Entry<String, String> entry : fieldToSort.entrySet()) {
-
-//            if (MapUtils.isEmpty(comparators)) {
-//                System.out.println("string is empty or null");
-//            }
 
             Sorting sorting = Sorting.valueOf(entry.getValue());
             String field = entry.getKey();
@@ -69,7 +77,6 @@ public class Store {
         for (int i = 1; i < comparators.size(); i++) {
             generalComparator = generalComparator.thenComparing(comparators.get(i));
         }
-
         return generalComparator;
     }
 
