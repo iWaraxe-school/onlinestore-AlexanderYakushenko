@@ -1,7 +1,5 @@
 package org.issoft;
-
 import lombok.SneakyThrows;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -18,5 +16,4 @@ public class Order extends Thread {
     private void orderProcessWait() {
         TimeUnit.SECONDS.sleep((long) (Math.random()*3+1));
     }
-
 }

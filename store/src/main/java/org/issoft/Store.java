@@ -1,16 +1,21 @@
 package org.issoft;
-
-import org.apache.commons.exec.util.MapUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-
-//import static org.issoft.XMLParser.fieldToSort;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Store {
+    private ExecutorService executorService;
+
+    public Store() {
+        this.executorService = Executors.newCachedThreadPool();
+    }
+
+    public void createOrder() {
+        executorService.execute(new Order());
+    }
     private static final Store store =new Store();
     int TOP_PRODUCTS_NUMBER =5;
     private final List<Category> categoryList = new ArrayList<>();
@@ -22,13 +27,13 @@ public class Store {
     public static Store getStore(){
         return store;
     }
-    public void createOrder() {
-        Order order = new Order();
-        order.start();
-    }
+//    public void createOrder() {
+//        Order order = new Order();
+//        order.start();
+//    }
     public void cleanOrder() {
         OrderCleaner orderCleaner = new OrderCleaner();
-        orderCleaner.start();
+        orderCleaner.run ();
     }
     public void printData() {
         for (Category category : categoryList) {

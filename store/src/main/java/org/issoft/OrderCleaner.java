@@ -2,7 +2,7 @@ package org.issoft;
 import lombok.SneakyThrows;
 import java.util.concurrent.TimeUnit;
 
-public class OrderCleaner extends Thread {
+public class OrderCleaner implements Runnable {
 
     @Override
     public void run() {
