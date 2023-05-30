@@ -1,6 +1,4 @@
 package org.issoft;
-
-
 import java.util.Comparator;
 
 public class ProductComparatorGenerator {

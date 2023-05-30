@@ -8,25 +8,34 @@ import java.util.Scanner;
 public class StoreApp {
 
     public static void main(String[] args)throws IOException  {
-
-
         Store store = Store.getStore();
         RandomStorePopulator populator = new RandomStorePopulator(store);
         populator.fillStore();
 
         //Scanner class used for input commands to get required result. (we can type the following: sort, top, quit)
-        Scanner sc = new Scanner(new InputStreamReader(System.in));
+
+        //  Scanner sc = new Scanner(new InputStreamReader(System.in));
+        UserInputHandler input = new UserInputHandler();
 
             boolean isRunning = true;
-        System.out.println("введи одну из команд: sort, top, quit");
+            boolean isOrderCleanerOn = false;
+        System.out.println("введи одну из команд: sort, top, create order, quit");
         while(isRunning)
             {
-                    switch (sc.nextLine()) {
+                 //   switch (sc.nextLine()) {
+                    switch (input.getNextInput ()) {
                         case "sort":
                             store.printData();
                             break;
                         case "top":
                             store.printTopProducts();
+                            break;
+                        case "create order":
+                            store.createOrder();
+                            if (!isOrderCleanerOn) {
+                                store.cleanOrder();
+                                isOrderCleanerOn = true;
+                            }
                             break;
                         case "quit":
                             isRunning = false;
