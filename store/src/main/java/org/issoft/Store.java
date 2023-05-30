@@ -32,8 +32,9 @@ public class Store {
 //        order.start();
 //    }
     public void cleanOrder() {
-        OrderCleaner orderCleaner = new OrderCleaner();
-        orderCleaner.run ();
+        //OrderCleaner orderCleaner = new OrderCleaner();
+        executorService.execute(new OrderCleaner());
+        //orderCleaner.run ();
     }
     public void printData() {
         for (Category category : categoryList) {
