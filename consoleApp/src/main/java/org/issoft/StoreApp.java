@@ -1,5 +1,4 @@
 package org.issoft;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -7,7 +6,7 @@ import java.util.Scanner;
 
 public class StoreApp {
 
-    public static void main(String[] args)throws IOException  {
+    public static void main(String[] args) {
         Store store = Store.getStore();
         RandomStorePopulator populator = new RandomStorePopulator(store);
         populator.fillStore();
@@ -16,13 +15,13 @@ public class StoreApp {
 
         //  Scanner sc = new Scanner(new InputStreamReader(System.in));
         UserInputHandler input = new UserInputHandler();
+        Runtime.getRuntime().addShutdownHook(new Thread(store::shutdown));
 
             boolean isRunning = true;
             boolean isOrderCleanerOn = false;
         System.out.println("введи одну из команд: sort, top, create order, quit");
         while(isRunning)
             {
-                 //   switch (sc.nextLine()) {
                     switch (input.getNextInput ()) {
                         case "sort":
                             store.printData();
@@ -33,12 +32,13 @@ public class StoreApp {
                         case "create order":
                             store.createOrder();
                             if (!isOrderCleanerOn) {
-                                store.cleanOrder();
+                                store.startOrderCleaner();
                                 isOrderCleanerOn = true;
-                            }
+                            }store.stop();
                             break;
                         case "quit":
                             isRunning = false;
+                            store.shutdown();
                             break;
                         default:
                             System.out.println("Command is not supported.");

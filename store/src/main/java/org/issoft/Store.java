@@ -5,16 +5,49 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Store {
     private ExecutorService executorService;
+    private ScheduledExecutorService scheduledExecutorService;
 
     public Store() {
         this.executorService = Executors.newCachedThreadPool();
+        this.scheduledExecutorService = Executors.newScheduledThreadPool(1);
     }
 
     public void createOrder() {
         executorService.execute(new Order());
+    }
+
+    public void startOrderCleaner() {
+        scheduledExecutorService.scheduleAtFixedRate(new OrderCleaner(), 2, 2, TimeUnit.SECONDS);
+    }
+
+    public void stop() {
+        executorService.shutdown();
+        scheduledExecutorService.shutdown();
+    }
+
+    public void shutdown() {
+        if (executorService != null) {
+            executorService.shutdown(); // Disable new tasks from being submitted
+            try {
+                // Wait a while for existing tasks to terminate
+                if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+                    executorService.shutdownNow(); // Cancel currently executing tasks
+                    // Wait a while for tasks to respond to being cancelled
+                    if (!executorService.awaitTermination(60, TimeUnit.SECONDS))
+                        System.err.println("ExecutorService did not terminate");
+                }
+            } catch (InterruptedException ie) {
+                // (Re-)Cancel if current thread also interrupted
+                executorService.shutdownNow();
+                // Preserve interrupt status
+                Thread.currentThread().interrupt();
+            }
+        }
     }
     private static final Store store =new Store();
     int TOP_PRODUCTS_NUMBER =5;
