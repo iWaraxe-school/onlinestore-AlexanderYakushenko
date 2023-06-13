@@ -6,8 +6,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class Cart {
-   // private static List<Product> goodsInCart = new CopyOnWriteArrayList<>();
-   //private static List<Product> goodsInCart;
    private static Queue<Product> goodsInCart;
     static {
       goodsInCart = new ConcurrentLinkedQueue<>();
