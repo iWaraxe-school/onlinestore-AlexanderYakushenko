@@ -6,7 +6,6 @@ public class OrderCleaner implements Runnable {
 
     @Override
     public void run() {
-        //while (true) {
             cleanProcessWait();
             Cart.clearCart();
     }

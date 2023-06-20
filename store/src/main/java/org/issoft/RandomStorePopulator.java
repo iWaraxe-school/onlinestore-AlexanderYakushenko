@@ -6,12 +6,9 @@ import java.util.Set;
 public class RandomStorePopulator {
 
     private Store store;
-
-
     public RandomStorePopulator(Store store) {
         this.store = store;
     }
-
     public Set<Category> createCategories() {
         Set<Category> categories = new HashSet<>();
         Reflections reflections = new Reflections("org.issoft");
@@ -38,9 +35,5 @@ public class RandomStorePopulator {
             }
             store.addCategory(category);
         }
-
-
     }
-
-
 }

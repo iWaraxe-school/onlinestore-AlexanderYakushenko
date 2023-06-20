@@ -3,7 +3,6 @@ import lombok.SneakyThrows;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-//public class Order extends Thread {
 public class Order implements Runnable {
     @Override
     public void run() {
