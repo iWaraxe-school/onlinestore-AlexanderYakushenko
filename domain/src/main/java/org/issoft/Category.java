@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Category {
 
+        private Integer Id;
         private String name;
         private List<Product> productList;
         public List<Product> getProductList() {
@@ -20,6 +21,7 @@ public class Category {
             return name;
         }
 
+
     public void printProducts() {
         for (Product product: productList) {
             System.out.println(product);
@@ -30,6 +32,8 @@ public class Category {
     }
     public void addProduct (Product product){
             productList.add(product);
-
+    }
+    public int getId() {
+        return Id;
     }
 }

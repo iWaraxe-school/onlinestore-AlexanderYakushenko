@@ -10,6 +10,10 @@ public class Product {
         return new Product().new ProductBuilder();
     }
 
+    public int getCategoryId() {
+        return categoryId;
+    }
+
     public class ProductBuilder{
         private String name;
         private double rate;

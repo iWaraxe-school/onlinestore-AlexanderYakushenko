@@ -13,21 +13,27 @@ import java.util.Set;
 
 public class DBHelper {
 
-        private String url ;
-        private String user;
-        private String password;
+        static final String URL = "jdbc:mysql://localhost:3306/onlineStore" ;
+        static final String USER = "user";
+        static final String PASSWORD = "user";
         static Connection CONNECTION = null;
+        static Statement  STATEMENT = null;
+        static Statement  STATEMENT_ENCLOSED = null;
+        static ResultSet RESULTSET = null;
+        static ResultSet RESULTSET_ENCLOSED = null;
+
+
 
         /**
          * Constructs a new DatabaseHelper with the specified database URL, username, and password.
-         * @param url the URL of the database to connect to
-         * @param user the username to use when connecting to the database
-         * @param password the password to use when connecting to the database
+         * @param URL the URL of the database to connect to
+         * @param USER the username to use when connecting to the database
+         * @param PASSWORD the password to use when connecting to the database
          */
-        public DBHelper(String url, String user, String password) throws SQLException {
-            this.url = url;
-            this.user= user;
-            this.password = password;
+        public DBHelper(String URL, String USER, String PASSWORD) throws SQLException {
+//            URL;
+//            USER= user;
+//            PASSWORD = password;
 
             Store store = Store.getStore();
 
@@ -39,7 +45,7 @@ public class DBHelper {
         }
 
         private Connection getConnection() throws SQLException {
-            return DriverManager.getConnection(url, user, password);
+            return DriverManager.getConnection(URL, USER, PASSWORD);
         }
 
         /**

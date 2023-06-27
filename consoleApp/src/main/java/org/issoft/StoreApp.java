@@ -5,13 +5,15 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import static org.issoft.DBHelper.*;
+
 public class StoreApp {
 
     public static void main(String[] args) throws SQLException {
         Store store = Store.getStore();
         RandomStorePopulator populator = new RandomStorePopulator(store);
         populator.fillStore();
-        DBHelper dbHelper = new DBHelper("jdbc:h2:~/OnlineStore", "sa", "");
+        DBHelper dbHelper = new DBHelper(URL, USER, PASSWORD);
 
         //Scanner class used for input commands to get required result. (we can type the following: sort, top, quit)
 
