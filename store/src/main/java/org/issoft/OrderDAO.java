@@ -7,9 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static org.issoft.DbConstants.*;
+
 public class OrderDAO {
-    private static final String INSERT_ORDER_QUERY =
-            "INSERT INTO ORDERS (CATEGORY_ID, PRODUCT_ID, NAME, RATE, PRICE) VALUES(?,?,?,?,?)";
     private DBConnectionManager connectionManager;
     public OrderDAO(DBConnectionManager connectionManager){this.connectionManager = connectionManager;}
     @SneakyThrows
@@ -30,9 +30,8 @@ public class OrderDAO {
     }
 
     public int getLastOrderId() {
-        String query = "SELECT ID ORDERS ORDER BY ID DESC LIMIT 1";
         try (Connection connection = DBConnectionManager.getConnection();
-        PreparedStatement statement = connection.prepareStatement(query);
+        PreparedStatement statement = connection.prepareStatement(LAST_ORDER_ID);
              ResultSet resultSet = statement.executeQuery()){
             if (resultSet.next()){
                 return resultSet.getInt(1);
@@ -45,13 +44,11 @@ public class OrderDAO {
     }
     public void clearOrdersTable() {
         try (Connection connection = DBConnectionManager.getConnection()){
-             String clearOrderQuery = "TRANCATE TABLE ORDERS";
-             PreparedStatement statement = connection.prepareStatement(clearOrderQuery);
+             PreparedStatement statement = connection.prepareStatement(CLEAR_ORDER_QUERY);
              statement.executeUpdate();
              System.err.println("Orders table cleared.");
         } catch (SQLException e){
         System.err.println("Failed to clear orders table: " + e.getMessage());
     }
-
     }
 }

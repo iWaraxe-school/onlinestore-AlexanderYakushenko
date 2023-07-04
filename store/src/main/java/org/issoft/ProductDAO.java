@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.issoft.DbConstants.*;
 public class ProductDAO {
 
 
@@ -15,7 +16,7 @@ public class ProductDAO {
 
     public void createProduct(Product product){
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO PRODUCTS (NAME, PRICE, RATE) VALUES(?,?,?)")){
+             PreparedStatement statement = connection.prepareStatement(INSERT_INTO_PRODUCTS)){
             statement.setString(1, product.getName().toString());
             statement.setDouble(2, product.getPrice().doubleValue());
             statement.setDouble(3, product.getRate().doubleValue());
@@ -28,7 +29,7 @@ public class ProductDAO {
 
     public void deleteProduct(Product product){
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM PRODUCTS WHERE NAME=?")){
+             PreparedStatement statement = connection.prepareStatement(DELETE_PRODUCT)){
             statement.setString(1, product.getName());
             statement.executeUpdate();
         }catch(SQLException e){
@@ -39,7 +40,7 @@ public class ProductDAO {
 
     public void updateProduct(Product product){
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement("UPDATE PRODUCTS SET PRICE=? WHERE NAME=?")){
+             PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT)){
             statement.setString(1, product.getName().toString());
             statement.setDouble(2, product.getPrice().doubleValue());
             statement.executeUpdate();
@@ -49,21 +50,22 @@ public class ProductDAO {
         }
     }
 
-    public List<Product> getAllProducts(){
-        RandomProductGenerator productGenerator = new RandomProductGenerator()
-        //CategoryFactory categoryFactory = new CategoryFactory();
+    public List<Product> getAllProducts() throws SQLException {
+        RandomProductGenerator productGenerator = new RandomProductGenerator();
         List<Product> products = new ArrayList<>();
-        try (Connection connection = DBConnectionManager.getConnection());
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUCTS")){
-        ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next())
-                Product product = productGenerator.generateProduct()(resultSet.getString("Name"));
-                product.setName(resultSet.getString("NAME"));
-                products.add(product);
+        try (Connection connection = DBConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(ALL_PRODUCTS)){
+              ResultSet resultSet = statement.executeQuery(); {
+            while (resultSet.next()) {
+                Product product = productGenerator.generateProduct;
 
+                resultSet.getString("NAME");
+                product.setName(resultSet.getString("NAME"));
+                products.add(product);}
         } catch(SQLException e) {
             System.err.println("Error retrieving products" + e.getMessage());
-            throw new RuntimeException();
+           // throw new RuntimeException();
+                e.printStackTrace();
         }
         return products;
     }
