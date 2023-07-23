@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 
 public class RandomProductGenerator {
     private static final Faker FAKER = new Faker();
+    public Product generateProduct;
 
 
     private Double generatePrice() {
@@ -28,7 +29,8 @@ public class RandomProductGenerator {
         }
         return null;
     }
-    public Product generateProduct(String categoryName) {
+   public Product generateProduct(String categoryName) {
+
         Product product = Product.newProductBuider()
                 .setName(generateName(categoryName))
                 .setPrice(generatePrice())

@@ -10,8 +10,15 @@ public class Product {
         return new Product().new ProductBuilder();
     }
 
-    public int getCategoryId() {
+    public int getCategoryId(Category) {
         return categoryId;
+    }
+
+    public void setName(String name) {
+    }
+
+    public int getId() {
+        return Id;
     }
 
     public class ProductBuilder{

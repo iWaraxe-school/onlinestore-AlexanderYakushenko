@@ -1,7 +1,5 @@
 package org.issoft;
 
-import lombok.SneakyThrows;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,11 +13,10 @@ public class CategoryDAO {
     private DBConnectionManager connectionManager;
     public CategoryDAO(DBConnectionManager connectionManager){this.connectionManager = connectionManager;}
 
-  //  @SneakyThrows
     public void createCategory(Category category){
         try (Connection connection = connectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(INSERT_INTO_CATEGORIES)){
-                statement.setString(1, category.getName().toString());
+                statement.setString(1, category.getName());
                 statement.executeUpdate();
         }catch(SQLException e){
                 System.err.println("Error creating category" + e.getMessage());
@@ -41,7 +38,7 @@ public class CategoryDAO {
     public void updateCategory(Category category){
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_CATEGORY)){
-            statement.setString(1, category.getName().toString());
+            statement.setString(1, category.getName());
             statement.setInt(1, category.getId());
             statement.executeUpdate();
         }catch(SQLException e){
