@@ -36,4 +36,7 @@ public class Category {
     public int getId() {
         return Id;
     }
+
+    public void setId(int id) {
+    }
 }

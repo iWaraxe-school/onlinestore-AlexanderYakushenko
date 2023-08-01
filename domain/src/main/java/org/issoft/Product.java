@@ -1,24 +1,27 @@
 package org.issoft;
 
 public class Product {
+    private int  id;
     private String name;
     private Double price;
     private Double rate;
+   // private Integer categoryId;
 
     //Builder pattern
     public static ProductBuilder newProductBuider(){
         return new Product().new ProductBuilder();
     }
 
-    public int getCategoryId(Category) {
-        return categoryId;
+    public static int getCategoryId() {
+        Category category = null;
+        return category;
     }
 
     public void setName(String name) {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public class ProductBuilder{

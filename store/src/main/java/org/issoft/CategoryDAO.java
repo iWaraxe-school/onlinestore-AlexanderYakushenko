@@ -13,15 +13,16 @@ public class CategoryDAO {
     private DBConnectionManager connectionManager;
     public CategoryDAO(DBConnectionManager connectionManager){this.connectionManager = connectionManager;}
 
-    public void createCategory(Category category){
+    public Category createCategory(String category){
         try (Connection connection = connectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(INSERT_INTO_CATEGORIES)){
-                statement.setString(1, category.getName());
+                statement.setString(1, category.toString());
                 statement.executeUpdate();
         }catch(SQLException e){
                 System.err.println("Error creating category" + e.getMessage());
                 e.printStackTrace();
         }
+        return null;
     }
 
     public void deleteCategory(Category category){
@@ -39,7 +40,7 @@ public class CategoryDAO {
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_CATEGORY)){
             statement.setString(1, category.getName());
-            statement.setInt(1, category.getId());
+            statement.setInt(2, category.getId());
             statement.executeUpdate();
         }catch(SQLException e){
             System.err.println("Error updating category" + e.getMessage());
@@ -48,13 +49,14 @@ public class CategoryDAO {
     }
 
     public List<Category> getAllCategories(){
-        CategoryFactory categoryFactory = new CategoryFactory();
+        //CategoryFactory categoryFactory = new CategoryFactory();
         List<Category> categories = new ArrayList<>();
         try (Connection connection = DBConnectionManager.getConnection()){
         PreparedStatement statement = connection.prepareStatement(ALL_CATEGORIES);
         ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Category category = categoryFactory.createCategory(resultSet.getString("Name"));
+             //   Category category = categoryFactory.createCategory(resultSet.getString("Name"));
+                Category category = createCategory(resultSet.getString("Name"));
                 category.setId(resultSet.getInt("ID"));
                 categories.add(category);
             }
