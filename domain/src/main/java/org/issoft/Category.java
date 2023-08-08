@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Category {
 
-        private Integer Id;
+        public int id;
         private String name;
         private List<Product> productList;
         public List<Product> getProductList() {
@@ -34,9 +34,10 @@ public class Category {
             productList.add(product);
     }
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
+        this.id = id;
     }
 }

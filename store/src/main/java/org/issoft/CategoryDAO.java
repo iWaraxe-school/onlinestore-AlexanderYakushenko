@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.issoft.DbConstants.*;
 
 public class CategoryDAO {
@@ -22,7 +23,7 @@ public class CategoryDAO {
                 System.err.println("Error creating category" + e.getMessage());
                 e.printStackTrace();
         }
-        return null;
+        return category;
     }
 
     public void deleteCategory(Category category){
@@ -49,13 +50,11 @@ public class CategoryDAO {
     }
 
     public List<Category> getAllCategories(){
-        //CategoryFactory categoryFactory = new CategoryFactory();
         List<Category> categories = new ArrayList<>();
         try (Connection connection = DBConnectionManager.getConnection()){
         PreparedStatement statement = connection.prepareStatement(ALL_CATEGORIES);
         ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-             //   Category category = categoryFactory.createCategory(resultSet.getString("Name"));
                 Category category = createCategory(resultSet.getString("Name"));
                 category.setId(resultSet.getInt("ID"));
                 categories.add(category);

@@ -5,16 +5,16 @@ public class Product {
     private String name;
     private Double price;
     private Double rate;
-   // private Integer categoryId;
+    private int categoryId;
 
     //Builder pattern
     public static ProductBuilder newProductBuider(){
         return new Product().new ProductBuilder();
     }
 
-    public static int getCategoryId() {
-        Category category = null;
-        return category;
+    public void getCategoryId() {
+
+        //return  categoryId();
     }
 
     public void setName(String name) {
