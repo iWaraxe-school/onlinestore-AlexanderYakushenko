@@ -14,11 +14,13 @@ public class CategoryDAO {
     private DBConnectionManager connectionManager;
     public CategoryDAO(DBConnectionManager connectionManager){this.connectionManager = connectionManager;}
 
-    public Category createCategory(String category){
+    public Category createCategory(String categoryName ){
+        Category category = null;
         try (Connection connection = connectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(INSERT_INTO_CATEGORIES)){
-                statement.setString(1, category.toString());
+                statement.setString(1, categoryName);
                 statement.executeUpdate();
+                category = new Category(categoryName);
         }catch(SQLException e){
                 System.err.println("Error creating category" + e.getMessage());
                 e.printStackTrace();
@@ -51,17 +53,17 @@ public class CategoryDAO {
 
     public List<Category> getAllCategories(){
         List<Category> categories = new ArrayList<>();
-        try (Connection connection = DBConnectionManager.getConnection()){
+        try (Connection connection = connectionManager.getConnection();
         PreparedStatement statement = connection.prepareStatement(ALL_CATEGORIES);
-        ResultSet resultSet = statement.executeQuery();
+        ResultSet resultSet = statement.executeQuery()){
             while (resultSet.next()) {
-                Category category = createCategory(resultSet.getString("Name"));
+                Category category = new Category(resultSet.getString("Name"));
                 category.setId(resultSet.getInt("ID"));
                 categories.add(category);
             }
         } catch(SQLException e){
     System.err.println("Error retrieving categories" + e.getMessage());
-    throw new RuntimeException();
+    throw new RuntimeException("Error retrieving categories", e);
         }
         return categories;
     }
