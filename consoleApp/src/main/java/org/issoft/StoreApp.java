@@ -2,18 +2,21 @@ package org.issoft;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.Scanner;
+
+import static org.issoft.DBHelper.*;
 
 public class StoreApp {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Store store = Store.getStore();
         RandomStorePopulator populator = new RandomStorePopulator(store);
         populator.fillStore();
+        DBHelper dbHelper = new DBHelper(URL, USER, PASSWORD);
 
         //Scanner class used for input commands to get required result. (we can type the following: sort, top, quit)
 
-        //  Scanner sc = new Scanner(new InputStreamReader(System.in));
         UserInputHandler input = new UserInputHandler();
         Runtime.getRuntime().addShutdownHook(new Thread(store::shutdown));
 
@@ -44,9 +47,5 @@ public class StoreApp {
                             System.out.println("Command is not supported.");
                     }
             }
-                //  store.sortByXml();
-                //  store.printData();
-                //  System.out.println("---------------");
-                //  store.printTopProducts();
     }
 }

@@ -1,13 +1,33 @@
 package org.issoft;
 
 public class Product {
+    private int  id;
     private String name;
     private Double price;
     private Double rate;
+    private int categoryId;
 
     //Builder pattern
-    public static ProductBuilder newProductBuider(){
+    public static ProductBuilder newProductBuilder(){
         return new Product().new ProductBuilder();
+    }
+
+    public int getCategoryId() {
+        return  categoryId;
+    }
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public class ProductBuilder{
@@ -35,10 +55,6 @@ public class Product {
         }
     }
 
-    public String getName() {
-        return name;
-    }
-
     public Double getPrice() {
         return price;
     }
@@ -49,8 +65,7 @@ public class Product {
 
     @Override
     public String toString() {
-        String productInfo = String.format("Name:'%s', Price: %s,Rate: %s", name, price, rate);
-        return productInfo;
+        return String.format("Name:'%s', Price: %s,Rate: %s", name, price, rate);
     }
 }
 

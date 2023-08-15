@@ -50,7 +50,7 @@ public class Store {
         }
     }
     private static final Store store =new Store();
-    int TOP_PRODUCTS_NUMBER =5;
+    private static final int TOP_PRODUCTS_NUMBER =5;
     private final List<Category> categoryList = new ArrayList<>();
 
     public void addCategory(Category category) {
@@ -60,14 +60,8 @@ public class Store {
     public static Store getStore(){
         return store;
     }
-//    public void createOrder() {
-//        Order order = new Order();
-//        order.start();
-//    }
     public void cleanOrder() {
-        //OrderCleaner orderCleaner = new OrderCleaner();
         executorService.execute(new OrderCleaner());
-        //orderCleaner.run ();
     }
     public void printData() {
         for (Category category : categoryList) {
