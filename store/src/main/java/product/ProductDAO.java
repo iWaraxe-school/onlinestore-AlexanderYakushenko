@@ -1,4 +1,7 @@
-package org.issoft;
+package product;
+
+import db.DBConnectionManager;
+import org.issoft.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.issoft.DbConstants.*;
+import static db.DbConstants.*;
 public class ProductDAO {
 
 

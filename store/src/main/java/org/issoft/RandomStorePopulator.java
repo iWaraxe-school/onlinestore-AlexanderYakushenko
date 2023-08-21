@@ -1,5 +1,7 @@
 package org.issoft;
 import org.reflections.Reflections;
+import product.RandomProductGenerator;
+
 import java.util.HashSet;
 import java.util.Set;
 

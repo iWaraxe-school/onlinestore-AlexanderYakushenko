@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Category {
 
-        public int id;
+        private int id;
         private String name;
         private List<Product> productList;
         public Category(String name) {
@@ -28,12 +28,12 @@ public class Category {
         this.id = id;
     }
 
-    public void printProducts() {
+    protected void printProducts() {
         for (Product product: productList) {
             System.out.println(product);
         }
     }
-    public void printCategoryName(){
+    protected void printCategoryName(){
         System.out.println(name);
     }
     @Override

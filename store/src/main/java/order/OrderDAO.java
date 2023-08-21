@@ -1,11 +1,14 @@
-package org.issoft;
+package order;
+
+import db.DBConnectionManager;
+import org.issoft.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static org.issoft.DbConstants.*;
+import static db.DbConstants.*;
 
 public class OrderDAO {
     private DBConnectionManager connectionManager;

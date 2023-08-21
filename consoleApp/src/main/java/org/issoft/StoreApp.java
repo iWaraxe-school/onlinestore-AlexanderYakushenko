@@ -1,11 +1,9 @@
 package org.issoft;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.sql.SQLException;
-import java.util.Scanner;
+import db.DBHelper;
 
-import static org.issoft.DBHelper.*;
+import java.sql.SQLException;
+
+import static db.DBHelper.*;
 
 public class StoreApp {
 

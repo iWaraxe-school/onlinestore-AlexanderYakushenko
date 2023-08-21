@@ -1,5 +1,7 @@
-package org.issoft;
+package order;
 import lombok.SneakyThrows;
+import org.issoft.Cart;
+
 import java.util.concurrent.TimeUnit;
 
 public class OrderCleaner implements Runnable {
