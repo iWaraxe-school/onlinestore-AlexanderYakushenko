@@ -11,7 +11,7 @@ public class StoreApp {
         Store store = Store.getStore();
         RandomStorePopulator populator = new RandomStorePopulator(store);
         populator.fillStore();
-        DBHelper dbHelper = new DBHelper(URL, USER, PASSWORD);
+        //DBHelper dbHelper = new DBHelper(URL, USER, PASSWORD);
 
         //Scanner class used for input commands to get required result. (we can type the following: sort, top, quit)
 
