@@ -1,4 +1,9 @@
 package org.issoft;
+import category.CategoryPrinter;
+import order.Order;
+import order.OrderCleaner;
+import product.ProductComparatorGenerator;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -66,9 +71,11 @@ public class Store {
     public void printData() {
         for (Category category : categoryList) {
             System.out.println("***************");
-            category.printCategoryName();
+            //category.printCategoryName();
+            CategoryPrinter.printCategoryName(category.getName());
             System.out.println("---------------");
-            category.printProducts();
+            //category.printProducts();
+            CategoryPrinter.printProducts(category.getProductList());
             System.out.println("---------------");
         }
     }

@@ -1,6 +1,7 @@
-package org.issoft;
+package product;
 
 import com.github.javafaker.Faker;
+import org.issoft.Product;
 
 public class RandomProductGenerator {
     private static final Faker FAKER = new Faker();
@@ -31,7 +32,7 @@ public class RandomProductGenerator {
     }
    public Product generateProduct(String categoryName) {
 
-        Product product = Product.newProductBuider()
+        Product product = Product.newProductBuilder()
                 .setName(generateName(categoryName))
                 .setPrice(generatePrice())
                 .setRate(generateRate())

@@ -1,5 +1,9 @@
-package org.issoft;
+package category;
 
+import db.DBConnectionManager;
+import org.issoft.Category;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -7,11 +11,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.issoft.DbConstants.*;
+import static db.DbConstants.*;
 
 public class CategoryDAO {
 
     private DBConnectionManager connectionManager;
+    private static final Logger logger = LoggerFactory.getLogger(CategoryDAO.class);
     public CategoryDAO(DBConnectionManager connectionManager){this.connectionManager = connectionManager;}
 
     public Category createCategory(String categoryName ){
@@ -22,8 +27,7 @@ public class CategoryDAO {
                 statement.executeUpdate();
                 category = new Category(categoryName);
         }catch(SQLException e){
-                System.err.println("Error creating category" + e.getMessage());
-                e.printStackTrace();
+                handleSQLException("Error creating category",e);
         }
         return category;
     }
@@ -34,8 +38,7 @@ public class CategoryDAO {
             statement.setInt(1, category.getId());
             statement.executeUpdate();
         }catch(SQLException e){
-            System.err.println("Error deleting category" + e.getMessage());
-            e.printStackTrace();
+            handleSQLException("Error deleting category",e);
         }
     }
 
@@ -46,8 +49,7 @@ public class CategoryDAO {
             statement.setInt(2, category.getId());
             statement.executeUpdate();
         }catch(SQLException e){
-            System.err.println("Error updating category" + e.getMessage());
-            e.printStackTrace();
+            handleSQLException("Error updating category", e);
         }
     }
 
@@ -62,10 +64,14 @@ public class CategoryDAO {
                 categories.add(category);
             }
         } catch(SQLException e){
-    System.err.println("Error retrieving categories" + e.getMessage());
-    throw new RuntimeException("Error retrieving categories", e);
+    handleSQLException("Error retrieving categories", e);
         }
         return categories;
+    }
+
+    private void handleSQLException(String message, SQLException e) {
+        logger.error(message, e);
+        throw new RuntimeException(message, e);
     }
 }
 

@@ -1,4 +1,4 @@
-package org.issoft;
+package db;
 
 public interface DbConstants {
 
@@ -12,13 +12,13 @@ public interface DbConstants {
     String CREATE_PRODUCT_TABLE = "CREATE TABLE IF NOT EXISTS PRODUCTS ("+
             "ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL," +
             "CATEGORY_ID INT NOT NULL," +
-            "NAME VARCHAR(255) NOT NULL)," +
+            "NAME VARCHAR(255) NOT NULL," +
             "RATE DECIMAL(10,1) NOT NULL" +
             "PRICE DECIMAL(10,2) NOT NULL" +
             "FOREIGN KEY(CATEGORY_ID) REFERENCES CATEGORIES(ID));";
     String CREATE_ORDER_TABLE = "CREATE TABLE IF NOT EXISTS ORDERS ("+
             "ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL," +
-            "NAME VARCHAR(255) NOT NULL)," +
+            "NAME VARCHAR(255) NOT NULL," +
             "RATE DOUBLE NOT NULL" +
             "PRICE DOUBLE NOT NULL);";
     String INSERT_INTO_CATEGORIES = "INSERT INTO CATEGORIES(NAME) VALUES(?)";

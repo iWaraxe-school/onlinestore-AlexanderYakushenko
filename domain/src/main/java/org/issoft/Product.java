@@ -7,6 +7,9 @@ public class Product {
     private Double rate;
     private int categoryId;
 
+    private Product(){
+    }
+
     //Builder pattern
     public static ProductBuilder newProductBuilder(){
         return new Product().new ProductBuilder();
@@ -30,10 +33,16 @@ public class Product {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Name:'%s', Price: %s,Rate: %s", name, price, rate);
+    }
+
     public class ProductBuilder{
         private String name;
         private double rate;
         private double price;
+        private int categoryId;
 
         public ProductBuilder setName(String name){
             this.name = name;
@@ -47,10 +56,15 @@ public class Product {
             this.rate = rate;
             return this;
         }
+        public ProductBuilder setCategoryId(int categoryId) {
+            this.categoryId = categoryId;
+            return this;
+        }
         public Product build(){
             Product.this.name = this.name;
             Product.this.price = this.price;
             Product.this.rate = this.rate;
+            Product.this.categoryId = this.categoryId;
             return Product.this;
         }
     }
@@ -63,9 +77,6 @@ public class Product {
         return rate;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Name:'%s', Price: %s,Rate: %s", name, price, rate);
-    }
+
 }
 

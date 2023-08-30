@@ -1,5 +1,9 @@
-package org.issoft;
+package order;
 import lombok.SneakyThrows;
+import org.issoft.Cart;
+import org.issoft.Product;
+import org.issoft.Store;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
