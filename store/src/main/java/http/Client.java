@@ -42,6 +42,9 @@ public class Client {
         connection.setRequestProperty("Authorization", "Basic " + auth);
         return connection;
     }
+
+
+
         private static void sendPostRequest(String urlString, String auth) throws IOException {
             try {
             HttpURLConnection connection = establishConnection(urlString, auth, "POST");

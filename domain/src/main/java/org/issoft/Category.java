@@ -9,9 +9,15 @@ public class Category {
         private String name;
         private List<Product> productList;
         public Category(String name) {
-            this.name = name;
-            this.productList = new ArrayList<>();
+            this(name,0);
+            //this.name = name;
+          //  this.productList = new ArrayList<>();
         }
+    public Category(String name, int id) {
+        this.name = name;
+        this.id = id;
+        this.productList = new ArrayList<>();
+    }
     public List<Product> getProductList() {
             return productList;
          }
@@ -33,9 +39,9 @@ public class Category {
             System.out.println(product);
         }
     }
-    protected void printCategoryName(){
-        System.out.println(name);
-    }
+//    protected void printCategoryName(){
+//        System.out.println(name);
+//    }
     @Override
     public String toString() {
         return "Category{" +
@@ -43,7 +49,5 @@ public class Category {
                 ", name='" + name + '\'' +
                 '}';
     }
-
-
 
 }

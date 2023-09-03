@@ -8,6 +8,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Order implements Runnable {
+    
+    private final OrderService orderService;
+
+    public Order(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
     @Override
     public void run() {
         orderProcessWait();

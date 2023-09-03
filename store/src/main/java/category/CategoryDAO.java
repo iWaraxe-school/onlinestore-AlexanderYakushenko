@@ -17,15 +17,26 @@ public class CategoryDAO {
 
     private DBConnectionManager connectionManager;
     private static final Logger logger = LoggerFactory.getLogger(CategoryDAO.class);
-    public CategoryDAO(DBConnectionManager connectionManager){this.connectionManager = connectionManager;}
+
+    private static final String COLUMN_NAME = "Name";
+    private static final String COLUMN_ID = "ID";
+    public CategoryDAO(DBConnectionManager connectionManager){
+        this.connectionManager = connectionManager;
+    }
 
     public Category createCategory(String categoryName ){
         Category category = null;
         try (Connection connection = connectionManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(INSERT_INTO_CATEGORIES)){
+            PreparedStatement statement = connection.prepareStatement(INSERT_INTO_CATEGORIES, PreparedStatement.RETURN_GENERATED_KEYS)){
                 statement.setString(1, categoryName);
                 statement.executeUpdate();
+
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int categoryId = generatedKeys.getInt(1);
                 category = new Category(categoryName);
+                category.setId((categoryId));
+            }
         }catch(SQLException e){
                 handleSQLException("Error creating category",e);
         }
@@ -59,8 +70,10 @@ public class CategoryDAO {
         PreparedStatement statement = connection.prepareStatement(ALL_CATEGORIES);
         ResultSet resultSet = statement.executeQuery()){
             while (resultSet.next()) {
-                Category category = new Category(resultSet.getString("Name"));
-                category.setId(resultSet.getInt("ID"));
+                String categoryName = resultSet.getString(COLUMN_NAME);
+                int categoryId = resultSet.getInt(COLUMN_ID);
+                Category category = new Category(categoryName);
+                category.setId(categoryId);
                 categories.add(category);
             }
         } catch(SQLException e){
