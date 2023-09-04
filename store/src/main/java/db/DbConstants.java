@@ -1,10 +1,24 @@
 package db;
 
-public interface DbConstants {
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
-    String URL = "jdbc:mysql://localhost:3306/onlineStore" ;
-    String USER = "root";
-    String PASSWORD = "root12345";
+public final class DbConstants {
+    private static final Properties properties;
+
+    static {
+        properties = new Properties();
+        try (InputStream input = DbConstants.class.getResourceAsStream("/db.properties")) {
+            properties.load(input);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load database configuration", e);
+        }
+    }
+
+    public static final String URL = properties.getProperty("db.url");
+    public static final String USER = properties.getProperty("db.user");
+    public static final String PASSWORD = properties.getProperty("db.password");
     String DROP_TABLE_IF_EXIST = "DROP TABLE IF EXISTS %s";
     String CREATE_CATEGORY_TABLE = "CREATE TABLE IF NOT EXISTS CATEGORIES ("+
             "ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL," +

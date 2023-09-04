@@ -1,36 +1,38 @@
 package org.issoft;
 
 public class Product {
-    private int  id;
-    private String name;
-    private Double price;
-    private Double rate;
-    private int categoryId;
+    private final int  id;
+    private final String name;
+    private final Double price;
+    private final Double rate;
+    private final int categoryId;
 
-    private Product(){
+    private Product(int id, String name, Double price, Double rate, int categoryId){
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.rate = rate;
+        this.categoryId = categoryId;
     }
 
     //Builder pattern
     public static ProductBuilder newProductBuilder(){
-        return new Product().new ProductBuilder();
+        return new ProductBuilder();
     }
-
-    public int getCategoryId() {
-        return  categoryId;
-    }
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public int getId() {
+        return id;
     }
     public String getName() {
         return name;
     }
-
-    public int getId() {
-        return id;
+    public Double getPrice() {
+        return price;
+    }
+    public Double getRate() {
+        return rate;
+    }
+    public int getCategoryId() {
+        return  categoryId;
     }
 
     @Override
@@ -38,12 +40,17 @@ public class Product {
         return String.format("Name:'%s', Price: %s,Rate: %s", name, price, rate);
     }
 
-    public class ProductBuilder{
+    public static class ProductBuilder {
+        private int id;
         private String name;
-        private double rate;
-        private double price;
+        private Double price;
+        private Double rate;
         private int categoryId;
 
+        public ProductBuilder setId(int id){
+            this.id = id;
+            return this;
+}
         public ProductBuilder setName(String name){
             this.name = name;
             return this;
@@ -60,23 +67,16 @@ public class Product {
             this.categoryId = categoryId;
             return this;
         }
-        public Product build(){
-            Product.this.name = this.name;
-            Product.this.price = this.price;
-            Product.this.rate = this.rate;
-            Product.this.categoryId = this.categoryId;
-            return Product.this;
+        public Product build() {
+            if (name == null || name.trim().isEmpty()) {
+                throw new IllegalArgumentException("Name must not be empty");
+            }
+            if (price == null || price <= 0) {
+                throw new IllegalArgumentException("Price must be greater than 0");
+            }
+            return new Product(id, name, price, rate, categoryId);
         }
     }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public Double getRate() {
-        return rate;
-    }
-
 
 }
 

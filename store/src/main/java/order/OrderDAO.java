@@ -1,16 +1,17 @@
 package order;
-
 import db.DBConnectionManager;
 import org.issoft.Product;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static db.DbConstants.*;
 
 public class OrderDAO {
+    private static final Logger logger = LoggerFactory.getLogger(OrderDAO.class);
     private DBConnectionManager connectionManager;
     public OrderDAO(DBConnectionManager connectionManager){this.connectionManager = connectionManager;}
 
@@ -22,10 +23,10 @@ public class OrderDAO {
             statement.setString(3, product.getName());
             statement.setDouble(4, product.getRate());
             statement.setDouble(5, product.getPrice());
-            System.out.println(statement);
+            logger.info("Executing statement: {}", statement);
             statement.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Error creating order with product: " + product + " error: " +e.getMessage());
+            logger.error("Error creating order with product: " + product,e);
         }
     }
 
@@ -37,7 +38,7 @@ public class OrderDAO {
                 return resultSet.getInt(1);
             }
         }catch (SQLException e) {
-            System.err.println("No orders found error: "+ e.getMessage());
+            logger.error("No orders found error: ", e);
         }
         return  -1;
     }
@@ -47,7 +48,7 @@ public class OrderDAO {
              statement.executeUpdate();
              System.err.println("Orders table cleared.");
         } catch (SQLException e){
-        System.err.println("Failed to clear orders table: " + e.getMessage());
+        logger.error("Failed to clear orders table: ", e);
     }
     }
 }
